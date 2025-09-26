@@ -52,6 +52,8 @@ extern "C" {
 
 /* USER CODE END EM */
 
+void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
+
 /* Exported functions prototypes ---------------------------------------------*/
 void Error_Handler(void);
 void MX_USART1_UART_Init(void);
@@ -62,6 +64,8 @@ void MX_USART1_UART_Init(void);
 
 /* Private defines -----------------------------------------------------------*/
 #define ST7735_SPI_PORT hspi1
+#define BUZZER_TIM_HANDLE htim1
+#define BUZZER_TIM2_HANDLE htim2
 #define ST7735_DC_Pin GPIO_PIN_2
 #define ST7735_DC_GPIO_Port GPIOA
 #define ST7735_CS_Pin GPIO_PIN_3

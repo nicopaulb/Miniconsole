@@ -122,7 +122,6 @@ void ST7735_WriteString(uint16_t x, uint16_t y, const char* str, FontDef font, u
             }
 
             if(*str == ' ') {
-                // skip spaces in the beginning of the new line
                 str++;
                 continue;
             }

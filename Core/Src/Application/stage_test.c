@@ -3,6 +3,7 @@
 #include "hid_host_app.h"
 #include "st7735.h"
 #include "icons.h"
+#include "buzzer.h"
 
 #define STAGE_TITLE "TEST"
 
@@ -38,5 +39,6 @@ void Stage_Test_Handle(HID_Report_t *report, uint8_t battery) {
 }
 
 void Stage_Test_Exit_Handle(HID_Report_t *report, uint8_t battery) {
+	Buzzer_Play_Menu_Back();
 	App_Set_Stage(STAGE_MAINMENU_ENTER);
 }

@@ -4,6 +4,7 @@
 #include "stage.h"
 #include "hid_host_app.h"
 #include "st7735.h"
+#include "buzzer.h"
 
 static App_Stage_t stage;
 
@@ -11,8 +12,11 @@ static void Stage_Start_Enter_Handle(HID_Report_t* report, uint8_t battery);
 static void Stage_Start_Handle(HID_Report_t* report, uint8_t battery);
 static void Stage_Start_Exit_Handle(HID_Report_t* report, uint8_t battery);
 
+
+
 void App_Init(void) {
 	Screen_Init();
+	Buzzer_Play_Boot();
 }
 
 void App_Loop(void) {
@@ -86,6 +90,7 @@ void App_Set_Stage(App_Stage_t stage_new) {
 }
 
 static void Stage_Start_Enter_Handle(HID_Report_t* report, uint8_t battery) {
+	Buzzer_Play_Connected();
 	Screen_Header_Draw("INIT", battery);
 	Screen_Status_Draw("Connected !", "Press B to start");
 	stage = STAGE_START;

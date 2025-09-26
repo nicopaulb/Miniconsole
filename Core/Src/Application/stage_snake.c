@@ -3,6 +3,7 @@
 #include "hid_host_app.h"
 #include "st7735.h"
 #include "icons.h"
+#include "buzzer.h"
 
 #define STAGE_TITLE "SNAKE"
 
@@ -153,6 +154,7 @@ static void move_snake(coord_t *new_head) {
 			}
 		}
 	} else {
+		Buzzer_Play_Snake_Food();
 		body_length++;
 		coord_t food = spawn_food();
 		ST7735_FillRectangle(GRID_OFFSET_X(food.x), GRID_OFFSET_Y(food.y), SCREEN_CELL_SIZE, SCREEN_CELL_SIZE,
@@ -209,6 +211,7 @@ static void start_round(void) {
 
 static void end_round(void) {
 	char score[20];
+	Buzzer_Play_Game_Over();
 	snprintf(score, 20, "Score : %lu", body_length);
 	ST7735_WriteString(ST7735_CENTERED, (ST7735_HEIGHT - 7) / 2 - 10, "GAME OVER", Font_11x18, ST7735_WHITE,
 	ST7735_RED);
@@ -260,5 +263,6 @@ void Stage_Snake_Handle(HID_Report_t *report, uint8_t battery) {
 }
 
 void Stage_Snake_Exit_Handle(HID_Report_t *report, uint8_t battery) {
+	Buzzer_Play_Menu_Back();
 	App_Set_Stage(STAGE_MAINMENU_ENTER);
 }

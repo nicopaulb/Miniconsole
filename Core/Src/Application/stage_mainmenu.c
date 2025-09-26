@@ -60,12 +60,14 @@ void Stage_MainMenu_Handle(HID_Report_t *report, uint8_t battery) {
 		if (report->BTN_A) {
 			state = STATE_ENTER_PRESSED;
 		} else if (report->HAT_Switch == HATSWITCH_DOWN) {
+			Buzzer_Play_Menu_Move();
 			if (selected < MAINMENU_MAX - 1) {
 				selected++;
 				Screen_MainMenu_Select(selected);
 			}
 			state = STATE_DOWN_PRESSED;
 		} else if (report->HAT_Switch == HATSWITCH_UP) {
+			Buzzer_Play_Menu_Move();
 			if (selected > 0) {
 				selected--;
 				Screen_MainMenu_Select(selected);
